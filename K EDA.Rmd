@@ -9,10 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(ggplot2)
+library(readr)
 ```
 
 ```{r, cache=TRUE}
-library(readr)
 majordata <- read_csv("C:\\Users\\kdeso\\OneDrive\\Documents\\GitHub\\majordata.csv")
 View(majordata)
 ```
