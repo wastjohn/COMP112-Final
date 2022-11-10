@@ -11,9 +11,64 @@ library(tidyverse)
 library(lubridate)
 library(rvest)
 library(stringr)
+library(ggplot2)
+library(readr)
 ```
 
 ```{r}
-majors <- read_csv("majordata.csv") #once project is done, the repo could be published and the link would change to the scraped from the web
+majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv") #once project is done, the repo could be published and the link would change to the scraped from the web
 head(majors)
+
+
+#question: what is the difference in fine arts courses taken by physics triple majors
+majors %>%
+  filter(major1 == 'Physics' | major2 == 'Physics' | major3 == 'Physics', major_ct == 3)
+
+#average number of fine arts courses by all students = 4.3 --> 4
+mean(majors$FineArts_count)
+
+#mean fine arts for non-natural sciences and mathematics = 4.2 --> 4
+majors %>%
+  filter(major1_division != 'Natural Sciences and Mathematics', major2_division != 'Natural Sciences and Mathematics', major3_division != 'Natural Sciences and Mathematics') %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for fine arts = 24.3 --> 24
+majors %>%
+  filter(major1_division == 'Fine Arts' | major2_division == 'Fine Arts' | major3_division == 'Fine Arts') %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for STEM = 3.6 --> 4
+majors %>%
+  filter(major1_division == 'Natural Sciences and Mathematics' | major2_division == 'Natural Sciences and Mathematics' | major3_division == 'Natural Sciences and Mathematics') %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for physics majors = 3.7 --> 4
+majors %>%
+  filter(maj_Physics == 1) %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean for non-physics majors = 4.3 --> 4
+majors %>%
+  filter(maj_Physics == 0) %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for physics double majors = 4.0 --> 4
+majors %>%
+  filter(maj_Physics == 1, major_ct == 2) %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for physics triple majors = 6
+majors %>%
+  filter(maj_Physics == 1, major_ct == 3) %>%
+  summarize(avgFACount = mean(FineArts_count))
+
+#mean fine arts for all triple majors = 3.9 --> 4
+majors %>%
+  filter(major_ct == 3) %>%
+  summarize(avgFACount = mean(FineArts_count))
 ```
+
+
+
+
+
