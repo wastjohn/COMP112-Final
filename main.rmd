@@ -13,6 +13,9 @@ library(rvest)
 library(stringr)
 library(ggplot2)
 library(readr)
+library(ggpubr)
+library(plotly)
+library(flexdashboard)
 ```
 
 ```{r}
@@ -66,6 +69,21 @@ majors %>%
 majors %>%
   filter(major_ct == 3) %>%
   summarize(avgFACount = mean(FineArts_count))
+
+#story telling vis: number of triple majors per major type
+head(majors)
+
+triple_majors <- majors %>%
+  filter(major_ct == 3) %>%
+  group_by(major1, major1_division) %>%
+  summarize(cnt = n())
+
+p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_division)), fill = major1_division)) + 
+  geom_col() +
+  labs(title = 'Frequency of First Declared Majors for Macalester Triple-Majors', x = 'count') + 
+  scale_fill_viridis_d()
+
+ggplotly(p1) #first major
 ```
 
 
