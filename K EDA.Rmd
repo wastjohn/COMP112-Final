@@ -23,5 +23,35 @@ ggplot(majordata, aes(x=tot_enroll_ct))+
   facet_wrap(~terms_enrl_ct)
 ```
 
+```{r}
+majordata %>%
+  mutate(maj_MathSci = ifelse(major1_division == "Natural Sciences and Mathematics" | major2_division == "Natural Sciences and Mathematics" | major3_division == "Natural Sciences and Mathematics", TRUE, FALSE)) %>% 
+  mutate(maj_MathSci = replace_na(maj_MathSci, FALSE)) %>%
+  count(maj_MathSci, studied_away) %>%
+  group_by(maj_MathSci) %>%
+  mutate(perc = n/sum(n)) %>%
+  filter(studied_away == 1) %>%
+  group_by(studied_away) %>%
+  mutate(ratio = perc/(sum(perc) - perc)) #%>%
+#  filter(ratio == max(ratio)) %>%
+#  group_by(ratio) %>%
+#  select(ratio)
+```
+
+> Walk through the criteria for determining a STEM major. Explain prefix count. Draw conclusions - non-STEM majors have more variety in the courses they take
+
+```{r}
+majordata %>%
+  mutate(maj_MathSci = if_else(major1_division == "Natural Sciences and Mathematics" | major2_division == "Natural Sciences and Mathematics" | major3_division == "Natural Sciences and Mathematics", TRUE, FALSE)) %>% 
+  mutate(maj_MathSci = replace_na(maj_MathSci, FALSE)) %>%
+  ggplot(aes(x = prefix_count, fill = maj_MathSci))+
+  geom_density(alpha = 0.2)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+  scale_fill_manual(values = c("blue", "green"))+
+  labs(title = "Course Variety in STEM and non-STEM majors", x = "Number of Unique Departments with a Class Taken", y = "Density", fill = "STEM major")
+```
+
+
+
 
 
