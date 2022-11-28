@@ -80,10 +80,12 @@ triple_majors <- majors %>%
 
 p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_division)), fill = major1_division)) + 
   geom_col() +
-  labs(title = 'Frequency of First Declared Majors for Macalester Triple-Majors', x = 'count') + 
+  labs(title = 'Frequency of First Declared Majors for Macalester Triple-Majors', x = 'count', y = 'Major Division') + 
   scale_fill_viridis_d()
 
 ggplotly(p1) #first major
+
+table(majors$grad_year)
 ```
 
 
