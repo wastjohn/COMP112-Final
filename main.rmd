@@ -85,7 +85,8 @@ p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_divisio
 
 ggplotly(p1) #first major
 
-table(majors$grad_year)
+#if count(table(majors$StudentID)) > 10 then quantitiative,
+
 ```
 
 
