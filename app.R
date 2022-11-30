@@ -10,6 +10,7 @@
 library(shiny)
 library(tidyverse)
 library(ggplot2)
+library(DT)
 
 majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
 
@@ -19,17 +20,19 @@ ui <- fluidPage(
     # Application title
     titlePanel('Macalester Major Data'),
 
-    tableOutput('table'),
+    dataTableOutput('table'),
     # Sidebar with a slider input for number of bins 
     fluidRow(
       column(3,
-             selectInput('variable', label = 'Filter by:', choices = c(names(majors))),
-             actionButton('add_filter_btn', 'Add Filter')
+             selectInput('filter_var', label = 'Filter by:', choices = c(names(majors))),
+             selectInput('operation', label = 'Operation', choices = c('>', '<', '==', '>=', '<=')),
+             numericInput('filter_val', label = 'Value', value = 1),
+             #actionButton('add_filter_btn', 'Add Filter')
       ),
-      column(4, offset = 1,
-             selectInput('variable', label = 'Filter by:', choices = c(names(majors))),
-             actionButton('add_filter_btn', 'Add Filter')
-      ),
+      #column(4, offset = 1,
+             #selectInput('group_var', label = 'Group by:', choices = c(names(majors))),
+             #actionButton('add_filter_btn', 'Add Filter')
+      #),
       column(5,
              plotOutput('plot')
       )
@@ -39,13 +42,24 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
+  num_vars <- c()
+  
+  data <- reactive(majors %>% filter(eval(parse(text=paste0(input$filter_var,input$operation,input$filter_val)))))
+  
   output$plot <- renderPlot({
-    ggplot(majors, aes(x = sex)) +
-      geom_bar()
+    data() %>%
+      ggplot( aes_string(x = input$filter_var)) +
+        geom_histogram()
   })
   
-  output$table <- renderTable({
-    head(majors)
+  output$table <- renderDataTable({
+    datatable(
+      data() %>% as.data.frame(),
+      options = list(
+        scrollX = TRUE,
+        scrollY = '250px'
+      )        
+    )
   })
   
 }
