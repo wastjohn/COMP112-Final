@@ -18,6 +18,9 @@ library(plotly)
 library(flexdashboard)
 ```
 
+# First Generation Macalester College Majors
+
+
 ```{r}
 majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv") #once project is done, the repo could be published and the link would change to the scraped from the web
 head(majors)
@@ -86,10 +89,15 @@ p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_divisio
 ggplotly(p1) #first major
 
 #if count(table(majors$StudentID)) > 10 then quantitiative,
+rpart(outcome ~ variable1 + variable2 + variable3 , data = data)
+
 
 ```
 
+```{r}
+rpart(outcome ~ variable1 + variable2 + variable3 , data = data)
 
+```
 
 
 
