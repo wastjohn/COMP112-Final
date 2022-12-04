@@ -22,75 +22,47 @@ library(flexdashboard)
 
 
 ```{r}
-majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv") #once project is done, the repo could be published and the link would change to the scraped from the web
+majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
 head(majors)
 
+#How many first gen students are in the dataset?
+ggplot(majors, aes(x=first_gen)) +
+  geom_bar()
 
-#question: what is the difference in fine arts courses taken by physics triple majors
-majors %>%
-  filter(major1 == 'Physics' | major2 == 'Physics' | major3 == 'Physics', major_ct == 3)
+#save first gen's as their own dataset
+f_gen <- majors %>%
+  filter(first_gen == 'first gen')
 
-#average number of fine arts courses by all students = 4.3 --> 4
-mean(majors$FineArts_count)
+#When do first gen's graduate?
+ggplot(f_gen, aes(x = grad_year)) +
+  geom_bar()
 
-#mean fine arts for non-natural sciences and mathematics = 4.2 --> 4
-majors %>%
-  filter(major1_division != 'Natural Sciences and Mathematics', major2_division != 'Natural Sciences and Mathematics', major3_division != 'Natural Sciences and Mathematics') %>%
-  summarize(avgFACount = mean(FineArts_count))
+#What sex did first gens identify as?
+ggplot(f_gen, aes(x = sex)) +
+  geom_bar()
 
-#mean fine arts for fine arts = 24.3 --> 24
-majors %>%
-  filter(major1_division == 'Fine Arts' | major2_division == 'Fine Arts' | major3_division == 'Fine Arts') %>%
-  summarize(avgFACount = mean(FineArts_count))
+#How many first gens studied away?
+ggplot(f_gen, aes(x = studied_away)) +
+  geom_bar()
 
-#mean fine arts for STEM = 3.6 --> 4
-majors %>%
-  filter(major1_division == 'Natural Sciences and Mathematics' | major2_division == 'Natural Sciences and Mathematics' | major3_division == 'Natural Sciences and Mathematics') %>%
-  summarize(avgFACount = mean(FineArts_count))
+#how many majors did first gens have?
+ggplot(f_gen, aes(x = major_ct)) +
+  geom_bar()
 
-#mean fine arts for physics majors = 3.7 --> 4
-majors %>%
-  filter(maj_Physics == 1) %>%
-  summarize(avgFACount = mean(FineArts_count))
+#What were first gen's first majors?
+ggplot(f_gen, aes(y = major1, fill = major1_division)) +
+  geom_bar()
 
-#mean for non-physics majors = 4.3 --> 4
-majors %>%
-  filter(maj_Physics == 0) %>%
-  summarize(avgFACount = mean(FineArts_count))
+#what were first gen's second majors?
+ggplot(f_gen, aes(y = major2, fill = major2_division)) +
+  geom_bar()
 
-#mean fine arts for physics double majors = 4.0 --> 4
-majors %>%
-  filter(maj_Physics == 1, major_ct == 2) %>%
-  summarize(avgFACount = mean(FineArts_count))
+#what were first gen's third majors?
+ggplot(f_gen, aes(x = major3)) +
+  geom_bar()
 
-#mean fine arts for physics triple majors = 6
-majors %>%
-  filter(maj_Physics == 1, major_ct == 3) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for all triple majors = 3.9 --> 4
-majors %>%
-  filter(major_ct == 3) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#story telling vis: number of triple majors per major type
-head(majors)
-
-triple_majors <- majors %>%
-  filter(major_ct == 3) %>%
-  group_by(major1, major1_division) %>%
-  summarize(cnt = n())
-
-p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_division)), fill = major1_division)) + 
-  geom_col() +
-  labs(title = 'Frequency of First Declared Majors for Macalester Triple-Majors', x = 'count', y = 'Major Division') + 
-  scale_fill_viridis_d()
-
-ggplotly(p1) #first major
-
-#if count(table(majors$StudentID)) > 10 then quantitiative,
-rpart(outcome ~ variable1 + variable2 + variable3 , data = data)
-
+#interesting general information about first gens that could help with future questions 
+summary(f_gen) #no first gen students majored in geology, theater and dance, spanish/portuguese, etc
 
 ```
 
