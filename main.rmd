@@ -16,80 +16,139 @@ library(readr)
 library(ggpubr)
 library(plotly)
 library(flexdashboard)
+
+majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
+
+#save first gen's as their own dataset
+f_gen <- majors %>%
+  filter(first_gen == 'first gen')
+```
+
+# First Generation Macalester College Majors
+
+### What do we mean by "First Generation?" *A note about the data*
+
+First generation college students are students who are the first in their family to attend college. In terms of this research, first generation students are those who identify as "first gen" on Macalester forms utilized by Macalester's Institutional Research office. *The Institutional Research office provided us with the data set used in this research.*
+
+Now that we know where the data is coming from, let's clarify what it means to be a first gen student as it relates to the data.
+
+The Mac major data contains around 2500 units of observation, with a little more than 60 variables for each observation. The units of observation themselves are individual students that graduated from Macalester College between the Fall of 2013 and the Spring of 2018. The variables themselves contain information such as graduation year, sex, major(s), whether or not they are a first generation student, and whether or not they studied away.
+
+Our primary focus of this research was with students who identified as "first gen" compared to the entire data.
+
+### What do first gen students look like?
+
+How does the subsection of first gen students compare with the rest of the data?
+
+Surprisingly, most of the data has no information about whether or not a student is a first generational student or not. With what information is available, there are fewer first gen students than students who are not first gen.
+
+```{r, echo=FALSE}
+#How many first gen students are in the dataset?
+ggplot(majors, aes(x=first_gen)) +
+  geom_bar()
+```
+
+#### Graduation Year
+
+```{r, echo=FALSE}
+#When do first gen's graduate?
+fgen_year_plot <- ggplot(f_gen, aes(x = grad_year)) +
+  geom_bar() +
+  labs(title = 'First Generation Graduations Per Year', x = '', y = '')
+
+year_plot <- ggplot(majors, aes(x = grad_year, fill = grad_year)) +
+  geom_bar() + 
+  labs(title = 'All Macalester Graduations Per Year', x = '', y = '')
+
+year_fig <- ggarrange(fgen_year_plot, year_plot, ncol = 2)
+annotate_figure(year_fig, 
+                top = '', 
+                bottom = 'Graduation Year', 
+                left = 'Count', 
+                right = '')
+```
+
+#### Sex
+
+```{r, echo=FALSE}
+#What sex did first gens identify as?
+fgen_sex_plot <- ggplot(f_gen, aes(x = sex)) +
+  geom_bar()
+
+sex_plot <- ggplot(majors, aes(x = sex)) +
+  geom_bar()
+
+sex_fig <- ggarrange(fgen_sex_plot, sex_plot, ncol = 2)
+
+annotate_figure(sex_fig, 
+                top = 'Year', 
+                bottom = 'Bottom', 
+                left = 'Left', 
+                right = 'Right')
+```
+
+#### Studied Away
+
+```{r, echo=FALSE}
+#How many first gens studied away?
+fgen_sa_plot <- ggplot(f_gen, aes(x = studied_away)) +
+  geom_bar()
+
+sa_plot <- ggplot(majors, aes(x = studied_away)) +
+  geom_bar()
+
+sa_fig <- ggarrange(fgen_sa_plot, sa_plot, ncol = 2)
+
+annotate_figure(sa_fig, 
+                top = 'Year', 
+                bottom = 'Bottom', 
+                left = 'Left', 
+                right = 'Right')
+```
+
+#### More Than One Major?
+
+```{r, echo=FALSE}
+#how many majors did first gens have?
+ggplot(f_gen, aes(x = major_ct)) +
+  geom_bar()
+
+#What were first gen's first majors?
+ggplot(f_gen, aes(y = major1, fill = major1_division)) +
+  geom_bar()
+
+#what were first gen's second majors?
+ggplot(f_gen, aes(y = major2, fill = major2_division)) +
+  geom_bar()
+
+#what were first gen's third majors?
+ggplot(f_gen, aes(x = major3)) +
+  geom_bar()
+```
+
+
+
+
+
+
+```{r, echo=FALSE}
+
+
+head(majors)
+
+
+
+
+
+#interesting general information about first gens that could help with future questions 
+summary(f_gen) #no first gen students majored in geology, theater and dance, spanish/portuguese, etc
+
 ```
 
 ```{r}
-majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv") #once project is done, the repo could be published and the link would change to the scraped from the web
-head(majors)
-
-
-#question: what is the difference in fine arts courses taken by physics triple majors
-majors %>%
-  filter(major1 == 'Physics' | major2 == 'Physics' | major3 == 'Physics', major_ct == 3)
-
-#average number of fine arts courses by all students = 4.3 --> 4
-mean(majors$FineArts_count)
-
-#mean fine arts for non-natural sciences and mathematics = 4.2 --> 4
-majors %>%
-  filter(major1_division != 'Natural Sciences and Mathematics', major2_division != 'Natural Sciences and Mathematics', major3_division != 'Natural Sciences and Mathematics') %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for fine arts = 24.3 --> 24
-majors %>%
-  filter(major1_division == 'Fine Arts' | major2_division == 'Fine Arts' | major3_division == 'Fine Arts') %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for STEM = 3.6 --> 4
-majors %>%
-  filter(major1_division == 'Natural Sciences and Mathematics' | major2_division == 'Natural Sciences and Mathematics' | major3_division == 'Natural Sciences and Mathematics') %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for physics majors = 3.7 --> 4
-majors %>%
-  filter(maj_Physics == 1) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean for non-physics majors = 4.3 --> 4
-majors %>%
-  filter(maj_Physics == 0) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for physics double majors = 4.0 --> 4
-majors %>%
-  filter(maj_Physics == 1, major_ct == 2) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for physics triple majors = 6
-majors %>%
-  filter(maj_Physics == 1, major_ct == 3) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#mean fine arts for all triple majors = 3.9 --> 4
-majors %>%
-  filter(major_ct == 3) %>%
-  summarize(avgFACount = mean(FineArts_count))
-
-#story telling vis: number of triple majors per major type
-head(majors)
-
-triple_majors <- majors %>%
-  filter(major_ct == 3) %>%
-  group_by(major1, major1_division) %>%
-  summarize(cnt = n())
-
-p1 <- ggplot(triple_majors, aes(x = cnt, y = reorder(major1, desc(major1_division)), fill = major1_division)) + 
-  geom_col() +
-  labs(title = 'Frequency of First Declared Majors for Macalester Triple-Majors', x = 'count', y = 'Major Division') + 
-  scale_fill_viridis_d()
-
-ggplotly(p1) #first major
-
-#if count(table(majors$StudentID)) > 10 then quantitiative,
+#rpart(outcome ~ variable1 + variable2 + variable3 , data = data)
 
 ```
-
-
 
 
 
