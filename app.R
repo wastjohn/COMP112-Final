@@ -1,11 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 
 library(shiny)
 library(tidyverse)
@@ -30,22 +22,6 @@ ui <- fluidPage(
                 tabPanel("Summary", verbatimTextOutput("summary")),
                 tabPanel("Table", tableOutput("table"))
     )
-
-    #dataTableOutput('table'),
-
-    #fluidRow(
-     # column(4,
-      #       selectInput('filter_var', label = 'Filter by:', choices = c(names(majors))),
-       #      selectInput('operation', label = 'Operation', choices = c('>', '<', '==', '>=', '<=')),
-        #     numericInput('filter_val', label = 'Value', value = 1)),
-             #actionButton('add_filter_btn', 'Add Filter')
-      #),
-      #column(4, offset = 1,
-             #selectInput('group_var', label = 'Group by:', choices = c(names(majors))),
-             #actionButton('add_filter_btn', 'Add Filter')
-      #),
-    
-    #plotOutput('plot')
 )
 
 # Define server logic required to draw a histogram
