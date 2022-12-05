@@ -132,11 +132,41 @@ ggplot(f_gen, aes(x = major3)) +
 
 
 ```{r, echo=FALSE}
-
+library(rpart)
+library(rpart.plot)
 
 head(majors)
 
 
+first_gen_major <- majors %>% 
+  drop_na(first_gen)
+  
+shuffle_index <- sample(1:nrow(first_gen_major))
+
+first_gen_major <- first_gen_major[shuffle_index, ]
+
+clean_first_gen <- first_gen_major %>%
+  select(c(first_gen, sex, tot_enroll_ct, prefix_count, major1_division))
+
+create_train_test <- function(data, size = 0.8, train = TRUE) {
+    n_row = nrow(data)
+    total_row = size * n_row
+    train_sample <- 1:total_row
+    if (train == TRUE) {
+        return (data[train_sample, ])
+    } else {
+        return (data[-train_sample, ])
+    }
+}
+
+data_train <- create_train_test(clean_first_gen, 0.8, train = TRUE)
+
+data_test <- create_train_test(clean_first_gen, 0.8, train = FALSE)
+
+fit <- rpart(sex~., data = data_train, method = "class")
+
+rpart.plot(fit, extra = 106)
+```
 
 
 
