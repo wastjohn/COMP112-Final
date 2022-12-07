@@ -173,11 +173,27 @@ rpart.plot(fit, extra = 106)
 #interesting general information about first gens that could help with future questions 
 summary(f_gen) #no first gen students majored in geology, theater and dance, spanish/portuguese, etc
 
-```
 
 ```{r}
-#rpart(outcome ~ variable1 + variable2 + variable3 , data = data)
+#make as many plots as you can
 
+head(majors)
+
+ggplot(majors, aes(y = major1)) +
+  geom_bar() +
+  facet_grid(~first_gen)
+
+ggplot(majors, aes(y = major2)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = major2)) +
+  geom_bar()
+
+ggplot(majors, aes(y = major1_division)) +
+  geom_bar()
+
+majors %>%
+  filter(is.na(major1_divison))
 ```
 
 
