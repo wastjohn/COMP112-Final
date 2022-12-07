@@ -54,6 +54,16 @@ majordata %>%
 ```
 
 ```{r}
+first_gen_only <- majordata %>% 
+  drop_na(first_gen) %>%
+  filter(first_gen == "first gen") %>%
+  select(-c(StudentID, concentration_ct))
+
+View(first_gen_only)
+```
+
+
+```{r}
 first_gen_major <- majordata %>% 
   drop_na(first_gen)
   

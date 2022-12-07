@@ -31,7 +31,7 @@ ui <- fluidPage(
                          ),
                 tabPanel("Classification Tree", 
                          plotOutput("treeplot"),
-                         selectInput('filter_opt', label = 'Filter Options', choices = c(names(majors)), multiple = TRUE,selected = c('finpuirst_gen'))
+                         selectInput('filter_opt', label = 'Filter Options', choices = c(names(majors)), multiple = TRUE,selected = c("first_gen"))
                          
                          ),
                 tabPanel("Scatter Plot", 
@@ -94,12 +94,8 @@ server <- function(input, output, session) {
     shuffle_index <- sample(1:nrow(first_gen_major))
     
     first_gen_major <- first_gen_major[shuffle_index, ]
-    
-    #clean_first_gen <- first_gen_major %>%
-     # select(c(first_gen, sex, tot_enroll_ct, prefix_count, major1_division))
-    #input$filter_opt
-    browser()
-    clean_first_gen <- first_gen_major[c('sex',input$filter_opt)]
+
+    clean_first_gen <- first_gen_major[c("first_gen", input$filter_opt)]
     
     create_train_test <- function(data, size = 0.8, train = TRUE) {
       n_row = nrow(data)
@@ -116,7 +112,7 @@ server <- function(input, output, session) {
     
     data_test <- create_train_test(clean_first_gen, 0.8, train = FALSE)
     
-    fit <- rpart(sex~., data = data_train, method = "class")
+    fit <- rpart(first_gen~., data = data_train, method = "class")
     
     rpart.plot(fit, extra = 106)
     
