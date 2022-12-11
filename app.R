@@ -53,12 +53,34 @@ ui <- fluidPage(
                          ), align = 'center'
                          
                 ),
+                tabPanel("Proportional Bar Plot",
+                         fluidRow(
+                           column(12, plotOutput("prop_bar_plot"))
+                         ),
+                         
+                         fluidRow(
+                           column(12,
+                                  selectInput('prop_x_var', label = 'X Variable', choices = c(names(majors)), selected = 'first_gen'),
+                                  selectInput('division_var', label = 'Division', choices = c(), selected = 'first_gen'),
+                                  selectInput('filter_var', label = 'Filter By:', choices = c('Fine Arts', 'Humanities', 'Interdisciplinary', 'Natural Sciences and Mathematics','Social Sciences'), selected = 'Fine Arts')
+                           )
+                         ), align = 'center'
+                         
+                ),
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
 
+  output$prop_bar_plot <- renderPlot({
+    
+    ggplot(fgen %>% filter(major1_division == input$filter_var), aes(x = .data[[input$prop_x_var]], fill = major1)) +
+      geom_bar(position = 'Fill') +
+      labs(title = 'First Gen Prop Bar Plot') +
+      scale_fill_viridis_d()
+  })
+  
   output$fgen_bar_plot <- renderPlot({
     
     ggplot(f_gen, aes(x = .data[[input$x_var]]))+
