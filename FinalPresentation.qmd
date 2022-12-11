@@ -3,7 +3,9 @@ title: "First Gen Students: A Different Experience"
 format: revealjs
 editor: visual
 ---
+
 ## The Data
+
 -   Provided by Macalester's Institutional Research office
 -   Data regarding previous graduated students from Fall 2013 to Spring 2018
 -   Approximately 2500 total students
@@ -26,18 +28,21 @@ ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   scale_fill_viridis_d()
   
 ```
+
 -   Approximately 120 first gen graduates
 -   Not a lot of first gen data till 2016
 -   Very specific sample
 -   Drop the NA (need to do this)
 
 ## The Sample: Limited
+
 ```{r}
 ggplot(fgen, aes(x=first_gen, fill = sex)) +
   geom_bar() + #add position = fill for a prop bar chart
   facet_grid(~grad_year) +
   scale_fill_viridis_d()
 ```
+
 -   Overall More Females than Males
 
 ## First Gen Majors
@@ -51,8 +56,7 @@ ggplot(fgen, aes(x = major_ct, fill = major1_division)) +
 
 -   Multi-Majors
 
-
-## First Major: Fine Arts {.scrollable}
+## First Major: Fine Arts
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
@@ -61,7 +65,9 @@ ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill 
   labs(title = 'Fine Arts Major Distribution') +
   facet_wrap(~sex)
 ```
-## First Major: Humanities 
+
+## First Major: Humanities
+
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'Fill') +
@@ -102,38 +108,54 @@ ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen,
   facet_wrap(~sex)
 ```
 
-
-## First Gen Majors: Second Major {.scrollable}
+## Second Major: Fine Arts
 
 ```{r}
-ggplot(fgen, aes(y = major2)) +
-  geom_bar() +
-  facet_grid(~first_gen)
-
 ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
   scale_fill_viridis_d() +
-  labs(title = 'Fine Arts Major Distribution')
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex)
+```
 
+## Second Major: Humanities
+
+```{r}
 ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
   scale_fill_viridis_d() +
-  labs(title = 'Humanities Major Distribution')
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex)
+```
 
+## Second Major: Interdisciplinary
+
+```{r}
 ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
   scale_fill_viridis_d()+
-  labs(title = 'Interdisciplinary Major Distribution')
+  labs(title = 'Interdisciplinary Major Distribution') +
+  facet_wrap(~sex)
+```
 
+## Second Major: Natural Sciences and Mathematics
+
+```{r}
 ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
   scale_fill_viridis_d() +
-  labs(title = 'Natural Science and Mathematics Major Distribution')
+  labs(title = 'Natural Science and Mathematics Major Distribution') +
+  facet_wrap(~sex)
+```
 
+## Second Major: Social Sciences
+
+```{r}
 ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'fill') +
   scale_fill_viridis_d() +
-  labs(title = 'Social Sciences Major Distribution')
+  labs(title = 'Social Sciences Major Distribution') +
+  facet_wrap(~sex)
 ```
 
 ## First Gen Majors: Third Major {.scrollable}
@@ -169,8 +191,6 @@ ggplot(fgen %>% filter(major3_division == 'Social Sciences'), aes(x = first_gen,
   labs(title = 'Social Sciences Major Distribution')
 ```
 
-
-
 ## Studied Away
 
 ```{r}
@@ -187,15 +207,14 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
   facet_grid(~first_gen)
 ```
 
-
 ## Conclusions
+
 -   Fewer first gen students overall
 -   First Gen records begin later
 -   More females than males
 
-
-
 ## Extra Code
+
 ```{r}
 #tabPanel("Proportional Bar Plot",
 #                         fluidRow(
@@ -223,6 +242,3 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
  #s })
 
 ```
-
-
-
