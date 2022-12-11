@@ -151,6 +151,7 @@ ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), a
 ## Second Major: Social Sciences
 
 ```{r}
+
 ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'fill') +
   scale_fill_viridis_d() +
@@ -158,53 +159,13 @@ ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen,
   facet_wrap(~sex)
 ```
 
-## First Gen Majors: Third Major {.scrollable}
-
-```{r}
-ggplot(fgen, aes(y = major3)) +
-  geom_bar() +
-  facet_grid(~first_gen)
-
-ggplot(fgen %>% filter(major3_division == 'Fine Arts'), aes(x = first_gen, fill = major3)) +
-  geom_bar(position = 'Fill') +
-  scale_fill_viridis_d() +
-  labs(title = 'Fine Arts Major Distribution')
-
-ggplot(fgen %>% filter(major3_division == 'Humanities'), aes(x = first_gen, fill = major3)) +
-  geom_bar(position = 'Fill') +
-  scale_fill_viridis_d() +
-  labs(title = 'Humanities Major Distribution')
-
-ggplot(fgen %>% filter(major3_division == 'Interdisciplinary'), aes(x = first_gen, fill = major3)) +
-  geom_bar(position = 'Fill') +
-  scale_fill_viridis_d() +
-  labs(title = 'Interdisciplinary Major Distribution')
-
-ggplot(fgen %>% filter(major3_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major3)) +
-  geom_bar(position = 'Fill') +
-  scale_fill_viridis_d() +
-  labs(title = 'Natural Sciences and Mathematics Major Distribution')
-
-ggplot(fgen %>% filter(major3_division == 'Social Sciences'), aes(x = first_gen, fill = major3)) +
-  geom_bar(position = 'fill') +
-  scale_fill_viridis_d() +
-  labs(title = 'Social Sciences Major Distribution')
-```
-
-## Studied Away
-
-```{r}
-ggplot(fgen, aes(x = studied_away)) +
-  geom_bar() +
-  facet_grid(~first_gen)
-```
-
 ## Studied Away By Sex
 
 ```{r}
 ggplot(fgen, aes(x = studied_away, fill = sex)) +
-  geom_bar() +
-  facet_grid(~first_gen)
+  geom_bar(position = 'Fill') +
+  facet_grid(~first_gen) +
+  scale_fill_viridis_d()
 ```
 
 ## Conclusions
