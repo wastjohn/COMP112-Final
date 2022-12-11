@@ -11,6 +11,11 @@ majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/mai
 f_gen <- majors %>%
   filter(first_gen == 'first gen')
 
+first_gen_major <- majors %>% 
+  drop_na(first_gen) %>%
+  select(!starts_with('maj_')) %>%
+  select(-c("StudentID", "grad_year"))
+
 ui <- fluidPage(
     #theme = bslib::bs_theme(bootswatch = "darkly"),
 
@@ -31,7 +36,7 @@ ui <- fluidPage(
                          ),
                 tabPanel("Classification Tree", 
                          plotOutput("treeplot"),
-                         selectInput('filter_opt', label = 'Filter Options', choices = c(names(majors)), multiple = TRUE,selected = c("first_gen"))
+                         selectInput('filter_opt', label = 'Filter Options', choices = c(names(first_gen_major)), multiple = TRUE, selected = c("first_gen"))
                          
                          ),
                 tabPanel("Scatter Plot", 
@@ -88,9 +93,6 @@ server <- function(input, output, session) {
   
   output$treeplot <- renderPlot({
     
-    first_gen_major <- majors %>% 
-      drop_na(first_gen)
-    
     shuffle_index <- sample(1:nrow(first_gen_major))
     
     first_gen_major <- first_gen_major[shuffle_index, ]
@@ -112,10 +114,15 @@ server <- function(input, output, session) {
     
     data_test <- create_train_test(clean_first_gen, 0.8, train = FALSE)
     
-    fit <- rpart(first_gen~., data = data_train, method = "class")
+    fit <- rpart(first_gen~., data = clean_first_gen, method = "class")
     
     rpart.plot(fit, extra = 106)
     
+    # predict_unseen <- predict(fit, data_test, type = "class")
+    # 
+    # table_mat <- table(data_test$first_gen, predict_unseen)
+    # 
+    # accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
   })
   
 }
