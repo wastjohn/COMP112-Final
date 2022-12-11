@@ -57,7 +57,7 @@ majordata %>%
 first_gen_only <- majordata %>% 
   drop_na(first_gen) %>%
   filter(first_gen == "first gen") %>%
-  select(-c(StudentID, concentration_ct))
+  select(-c(StudentID))
 
 View(first_gen_only)
 ```
@@ -65,14 +65,16 @@ View(first_gen_only)
 
 ```{r}
 first_gen_major <- majordata %>% 
-  drop_na(first_gen)
+  drop_na(first_gen) %>%
+  select(!starts_with('maj_')) %>%
+  select(-c("StudentID", "grad_year"))
   
 shuffle_index <- sample(1:nrow(first_gen_major))
 
 first_gen_major <- first_gen_major[shuffle_index, ]
 
 clean_first_gen <- first_gen_major %>%
-  select(c(first_gen, sex, tot_enroll_ct, prefix_count, major1_division))
+  select(c(first_gen, major1, major2))
 
 create_train_test <- function(data, size = 0.8, train = TRUE) {
     n_row = nrow(data)
@@ -89,7 +91,15 @@ data_train <- create_train_test(clean_first_gen, 0.8, train = TRUE)
 
 data_test <- create_train_test(clean_first_gen, 0.8, train = FALSE)
 
-fit <- rpart(sex~., data = data_train, method = "class")
+fit <- rpart(first_gen~., data = data_train, method = "class")
+
+predict_unseen <- predict(fit, data_test, type = "class")
+    
+table_mat <- table(data_test$first_gen, predict_unseen)
+
+accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
+accuracy_Test
+    
 rpart.plot(fit, extra = 106)
 ```
 
