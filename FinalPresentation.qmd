@@ -1,24 +1,228 @@
 ---
-title: "Untitled"
+title: "First Gen Students: A Different Experience"
 format: revealjs
 editor: visual
 ---
+## The Data
+-   Provided by Macalester's Institutional Research office
+-   Data regarding previous graduated students from Fall 2013 to Spring 2018
+-   Approximately 2500 total students
 
-## Quarto
+## The Sample {.smaller}
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+```{r, include=FALSE, echo=FALSE}
+library(readr)
+library(ggplot2)
+library(tidyverse)
+library(ggpubr)
+majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
+fgen <- majors %>% filter(is.na(first_gen) == FALSE)
+```
 
-## Bullets
+```{r, echo=FALSE}
+ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
+  geom_bar() +
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d()
+  
+```
+-   Approximately 120 first gen graduates
+-   Not a lot of first gen data till 2016
+-   Very specific sample
+-   Drop the NA (need to do this)
 
-When you click the **Render** button a document will be generated that includes:
+## The Sample: Limited
+```{r}
+ggplot(fgen, aes(x=first_gen, fill = sex)) +
+  geom_bar() + #add position = fill for a prop bar chart
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d()
+```
+-   Overall More Females than Males
 
--   Content authored with markdown
--   Output from executable code
-
-## Code {.scrollable .smaller}
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## First Gen Majors
 
 ```{r}
-1 + 1
+ggplot(fgen, aes(x = major_ct, fill = major1_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d()
 ```
+
+-   Multi-Majors
+
+
+## First Major: Fine Arts {.scrollable}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex)
+```
+## First Major: Humanities 
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex)
+
+```
+
+## First Major: Interdisciplinary
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Interdisciplinary Major Distribution')+ 
+  facet_wrap(~sex)
+
+```
+
+## First Major: Natural Sciences and Mathematics
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Sciences and Mathematics Major Distribution') +
+  facet_wrap(~sex)
+```
+
+## First Major: Social Sciences
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution')+
+  facet_wrap(~sex)
+```
+
+
+## First Gen Majors: Second Major {.scrollable}
+
+```{r}
+ggplot(fgen, aes(y = major2)) +
+  geom_bar() +
+  facet_grid(~first_gen)
+
+ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution')
+
+ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution')
+
+ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d()+
+  labs(title = 'Interdisciplinary Major Distribution')
+
+ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Science and Mathematics Major Distribution')
+
+ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution')
+```
+
+## First Gen Majors: Third Major {.scrollable}
+
+```{r}
+ggplot(fgen, aes(y = major3)) +
+  geom_bar() +
+  facet_grid(~first_gen)
+
+ggplot(fgen %>% filter(major3_division == 'Fine Arts'), aes(x = first_gen, fill = major3)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution')
+
+ggplot(fgen %>% filter(major3_division == 'Humanities'), aes(x = first_gen, fill = major3)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution')
+
+ggplot(fgen %>% filter(major3_division == 'Interdisciplinary'), aes(x = first_gen, fill = major3)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Interdisciplinary Major Distribution')
+
+ggplot(fgen %>% filter(major3_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major3)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Sciences and Mathematics Major Distribution')
+
+ggplot(fgen %>% filter(major3_division == 'Social Sciences'), aes(x = first_gen, fill = major3)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution')
+```
+
+
+
+## Studied Away
+
+```{r}
+ggplot(fgen, aes(x = studied_away)) +
+  geom_bar() +
+  facet_grid(~first_gen)
+```
+
+## Studied Away By Sex
+
+```{r}
+ggplot(fgen, aes(x = studied_away, fill = sex)) +
+  geom_bar() +
+  facet_grid(~first_gen)
+```
+
+
+## Conclusions
+-   Fewer first gen students overall
+-   First Gen records begin later
+-   More females than males
+
+
+
+## Extra Code
+```{r}
+#tabPanel("Proportional Bar Plot",
+#                         fluidRow(
+#                           column(12, plotOutput("prop_bar_plot"))
+#                         ),
+#                         
+#                         fluidRow(
+#                           column(12,
+ #                                 selectInput('prop_x_var', label = 'X Variable', choices = c(names(majors)), selected = 'first_gen'),
+#                                  selectInput('division_var', label = 'Division', choices = c(), selected = 'first_gen'),
+#                                  selectInput('filter_var', label = 'Filter By:', choices = c('Fine Arts', 'Humanities', 'Interdisciplinary', 'Natural Sciences and Mathematics','Social Sciences'), selected = 'Fine Arts')
+#                           )
+#                         ), align = 'center'
+#                         
+#                )#
+#
+
+#output$prop_bar_plot <- renderPlot({
+    
+#    ggplot(fgen %>% filter(major1_division == input$filter_var), aes(x = .data[[input$prop_x_var]], fill = major1)) +
+#      geom_bar(position = 'Fill') +
+#      labs(title = 'First Gen Prop Bar Plot') +
+#      scale_fill_viridis_d()
+    
+ #s })
+
+```
+
+
+
