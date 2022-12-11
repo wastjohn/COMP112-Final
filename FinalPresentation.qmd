@@ -169,37 +169,11 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 ```
 
 ## Conclusions
-
 -   Fewer first gen students overall
 -   First Gen records begin later
 -   More females than males
 
-## Extra Code
+## Limitations/Assumptions
+-   Small sample size
+-   
 
-```{r}
-#tabPanel("Proportional Bar Plot",
-#                         fluidRow(
-#                           column(12, plotOutput("prop_bar_plot"))
-#                         ),
-#                         
-#                         fluidRow(
-#                           column(12,
- #                                 selectInput('prop_x_var', label = 'X Variable', choices = c(names(majors)), selected = 'first_gen'),
-#                                  selectInput('division_var', label = 'Division', choices = c(), selected = 'first_gen'),
-#                                  selectInput('filter_var', label = 'Filter By:', choices = c('Fine Arts', 'Humanities', 'Interdisciplinary', 'Natural Sciences and Mathematics','Social Sciences'), selected = 'Fine Arts')
-#                           )
-#                         ), align = 'center'
-#                         
-#                )#
-#
-
-#output$prop_bar_plot <- renderPlot({
-    
-#    ggplot(fgen %>% filter(major1_division == input$filter_var), aes(x = .data[[input$prop_x_var]], fill = major1)) +
-#      geom_bar(position = 'Fill') +
-#      labs(title = 'First Gen Prop Bar Plot') +
-#      scale_fill_viridis_d()
-    
- #s })
-
-```
