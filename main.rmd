@@ -192,8 +192,54 @@ ggplot(f_gen, aes(y = major2)) +
 ggplot(majors, aes(y = major1_division)) +
   geom_bar()
 
+head(f_gen)
+
+f_gen %>%
+  group_by(admit_type) %>%
+  summarize(cnt = n())
+
+ggplot(f_gen, aes(x = studied_away)) +
+  geom_bar()
+
+ggplot(f_gen, aes(x = major_ct)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = major1)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = major2)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = major1_division)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = major2_division)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = Conc1Desc)) +
+  geom_bar()
+
+ggplot(f_gen, aes(y = Conc2Desc)) +
+  geom_bar()
+
+#Devi's code
 majors %>%
-  filter(is.na(major1_divison))
+  filter(first_gen != "NA") %>%
+  select(sex, first_gen) %>%
+  count(sex, first_gen) %>%
+  ggplot(aes(x = first_gen, y = n)) +
+  geom_col() + facet_wrap(~sex) + theme_classic()
+majorstd <- majors %>%
+  filter(first_gen == "first gen") %>%
+  select(major1, studied_away, sex)
+ggplot(majorstd, aes(y = major1, x = studied_away)) +
+  geom_col() + facet_wrap(~sex) +
+  labs(x = "Number of Students Studying Away", y = "Type of Major", title = "First generation students per major studying away from 2014 to 2018") + theme_classic()
+majors %>%
+  select(first_gen, terms_enrl_ct) %>%
+  count(first_gen, terms_enrl_ct) %>%
+  ggplot(aes(x = terms_enrl_ct, y = n, fill = first_gen)) +
+  geom_col(position = "fill") + theme_classic()
 ```
 
 
