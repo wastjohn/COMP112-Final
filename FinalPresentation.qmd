@@ -57,6 +57,7 @@ ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)
   labs(title = 'Proportion of First Major Division', x = 'Number of Majors', y = 'Percent') +
   scale_x_discrete(limits = 1)
 ```
+
 ## First Gen Majors: Major 2
 
 ```{r}
@@ -67,6 +68,7 @@ ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)
   labs(title = 'Proportion of Second Major Division', x = 'Number of Majors', y = 'Percent') +
   scale_x_discrete(limits = 2)
 ```
+
 ## First Gen Majors: Major 3
 
 ```{r}
@@ -203,11 +205,12 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 ```
 
 ## Conclusions
+
 -   Fewer first gen students overall
 -   First Gen records begin later
 -   More females than males
 
 ## Limitations/Assumptions
+
 -   Small sample size
 -   
-
