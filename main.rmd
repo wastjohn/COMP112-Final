@@ -5,24 +5,16 @@ date: "2022-11-04"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-library(lubridate)
-library(rvest)
-library(stringr)
-library(ggplot2)
+
+```{r, include=FALSE, echo=FALSE}
 library(readr)
+library(ggplot2)
+library(tidyverse)
 library(ggpubr)
-library(plotly)
-library(flexdashboard)
-
 majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
-
-#save first gen's as their own dataset
-f_gen <- majors %>%
-  filter(first_gen == 'first gen')
+fgen <- majors %>% filter(is.na(first_gen) == FALSE)
 ```
+
 
 # First Generation Macalester College Majors
 
@@ -52,7 +44,7 @@ ggplot(majors, aes(x=first_gen)) +
 
 ```{r, echo=FALSE}
 #When do first gen's graduate?
-fgen_year_plot <- ggplot(f_gen, aes(x = grad_year)) +
+fgen_year_plot <- ggplot(fgen, aes(x = grad_year)) +
   geom_bar() +
   labs(title = 'First Generation Graduations Per Year', x = '', y = '')
 
@@ -69,69 +61,8 @@ annotate_figure(year_fig,
 ```
 The first thing to notice about first gen students is that they don't make up a large portion of the student body in any given year. The only data available on the first gen status of students is from the 2016-2017 and the 2017-2018 classes, and even those data aren't fully complete. From the data available, it appears that about 10% of any given class is made up of first gen students, though the true rate could vary due to the amount of students whose status is unavailable.
 
-#### Sex
 
-```{r, echo=FALSE}
-#What sex did first gens identify as?
-fgen_sex_plot <- ggplot(f_gen, aes(x = sex)) +
-  geom_bar()
-
-sex_plot <- ggplot(majors, aes(x = sex)) +
-  geom_bar()
-
-sex_fig <- ggarrange(fgen_sex_plot, sex_plot, ncol = 2)
-
-annotate_figure(sex_fig, 
-                top = 'Year', 
-                bottom = 'Bottom', 
-                left = 'Left', 
-                right = 'Right')
-```
-
-#### Studied Away
-
-```{r, echo=FALSE}
-#How many first gens studied away?
-fgen_sa_plot <- ggplot(f_gen, aes(x = studied_away)) +
-  geom_bar()
-
-sa_plot <- ggplot(majors, aes(x = studied_away)) +
-  geom_bar()
-
-sa_fig <- ggarrange(fgen_sa_plot, sa_plot, ncol = 2)
-
-annotate_figure(sa_fig, 
-                top = 'Year', 
-                bottom = 'Bottom', 
-                left = 'Left', 
-                right = 'Right')
-```
-
-#### More Than One Major?
-
-```{r, echo=FALSE}
-#how many majors did first gens have?
-ggplot(f_gen, aes(x = major_ct)) +
-  geom_bar()
-
-#What were first gen's first majors?
-ggplot(f_gen, aes(y = major1, fill = major1_division)) +
-  geom_bar()
-
-#what were first gen's second majors?
-ggplot(f_gen, aes(y = major2, fill = major2_division)) +
-  geom_bar()
-
-#what were first gen's third majors?
-ggplot(f_gen, aes(x = major3)) +
-  geom_bar()
-```
-
-
-
-
-
-
+## Classification Tree
 ```{r, echo=FALSE}
 library(rpart)
 library(rpart.plot)
@@ -175,73 +106,208 @@ rpart.plot(fit, extra = 106)
 summary(f_gen) #no first gen students majored in geology, theater and dance, spanish/portuguese, etc
 
 
-```{r}
-#make as many plots as you can
 
-head(majors)
+## The Data
 
-ggplot(majors, aes(y = major1)) +
+-   Provided by Macalester's Institutional Research office
+-   Data regarding previous graduated students from Fall 2013 to Spring 2018
+-   Approximately 2500 total students
+
+## The Sample {.smaller}
+
+
+
+```{r, echo=FALSE}
+ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   geom_bar() +
-  facet_grid(~first_gen)
-
-ggplot(majors, aes(y = major2)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = major2)) +
-  geom_bar()
-
-ggplot(majors, aes(y = major1_division)) +
-  geom_bar()
-
-head(f_gen)
-
-f_gen %>%
-  group_by(admit_type) %>%
-  summarize(cnt = n())
-
-ggplot(f_gen, aes(x = studied_away)) +
-  geom_bar()
-
-ggplot(f_gen, aes(x = major_ct)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = major1)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = major2)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = major1_division)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = major2_division)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = Conc1Desc)) +
-  geom_bar()
-
-ggplot(f_gen, aes(y = Conc2Desc)) +
-  geom_bar()
-
-#Devi's code
-majors %>%
-  filter(first_gen != "NA") %>%
-  select(sex, first_gen) %>%
-  count(sex, first_gen) %>%
-  ggplot(aes(x = first_gen, y = n)) +
-  geom_col() + facet_wrap(~sex) + theme_classic()
-majorstd <- majors %>%
-  filter(first_gen == "first gen") %>%
-  select(major1, studied_away, sex)
-ggplot(majorstd, aes(y = major1, x = studied_away)) +
-  geom_col() + facet_wrap(~sex) +
-  labs(x = "Number of Students Studying Away", y = "Type of Major", title = "First generation students per major studying away from 2014 to 2018") + theme_classic()
-majors %>%
-  select(first_gen, terms_enrl_ct) %>%
-  count(first_gen, terms_enrl_ct) %>%
-  ggplot(aes(x = terms_enrl_ct, y = n, fill = first_gen)) +
-  geom_col(position = "fill") + theme_classic()
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d() +
+  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count')
+  
 ```
+
+-   Approximately 120 first gen graduates
+-   Not a lot of first gen data till 2016
+-   Very specific sample
+-   Drop the NA (need to do this)
+
+## The Sample: Limited
+
+```{r}
+ggplot(fgen, aes(x=first_gen, fill = sex)) +
+  geom_bar() + #add position = fill for a prop bar chart
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d() +
+  labs(title = 'First Gen Distribution by Sex from Fall 2015 to Spring 2018', x = 'Type of Student', y = 'Count')
+```
+
+-   Overall More Females than Males
+
+## First Gen Majors: Major 1
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of First Major Division', x = 'Number of Majors', y = 'Percent') +
+  scale_x_discrete(limits = 1)
+```
+## First Gen Majors: Major 2
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Second Major Division', x = 'Number of Majors', y = 'Percent') +
+  scale_x_discrete(limits = 2)
+```
+## First Gen Majors: Major 3
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Third Major Division', x = 'Number of Majors', y = 'Percent') +
+  scale_x_discrete(limits = 3)
+```
+
+## First Major: Fine Arts
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Fine Arts First Major', x = 'Type of Student', y = 'Percent')
+```
+
+## First Major: Humanities
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Humanities First Major', x = 'Type of Student', y = 'Percent')
+
+```
+
+## First Major: Interdisciplinary
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Interdisciplinary Major Distribution')+ 
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Interdisciplinary First Major', x = 'Type of Student', y = 'Percent')
+
+```
+
+## First Major: Natural Sciences and Mathematics
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Sciences and Mathematics Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics First Major', x = 'Type of Student', y = 'Percent')
+```
+
+## First Major: Social Sciences
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution')+
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Social Sciences First Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Second Major: Fine Arts
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Fine Arts Second Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Second Major: Humanities
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Humanities Second Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Second Major: Interdisciplinary
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d()+
+  labs(title = 'Interdisciplinary Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Interdisciplinary Second Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Second Major: Natural Sciences and Mathematics
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Science and Mathematics Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics Second Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Second Major: Social Sciences
+
+```{r}
+
+ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Social Sciences Second Major', x = 'Type of Student', y = 'Percent')
+```
+
+## Studied Away By Sex
+
+```{r}
+ggplot(fgen, aes(x = studied_away, fill = sex)) +
+  geom_bar(position = 'Fill') +
+  facet_grid(~first_gen) +
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Students Who Studied Abroad', x = 'Stayed Home or Studied Abroad', y = 'Percent') +
+  scale_x_discrete(limits = c(0, 1), labels = c('Home', 'Abroad'))
+```
+
+## Conclusions
+-   Fewer first gen students overall
+-   First Gen records begin later
+-   More females than males
+
+## Limitations/Assumptions
+-   Small sample size
+-   
+
+
 
 
 
