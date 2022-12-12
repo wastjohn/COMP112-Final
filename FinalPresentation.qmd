@@ -26,8 +26,7 @@ ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   geom_bar() +
   facet_grid(~grad_year) +
   scale_fill_viridis_d() +
-  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count')
-  
+  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
 ```
 
 -   Approximately 120 first gen graduates
@@ -42,7 +41,7 @@ ggplot(fgen, aes(x=first_gen, fill = sex)) +
   geom_bar() + #add position = fill for a prop bar chart
   facet_grid(~grad_year) +
   scale_fill_viridis_d() +
-  labs(title = 'First Gen Distribution by Sex from Fall 2015 to Spring 2018', x = 'Type of Student', y = 'Count')
+  labs(title = 'First Gen Distribution by Sex from Fall 2015 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
 ```
 
 -   Overall More Females than Males
@@ -54,7 +53,7 @@ ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)
   geom_bar(position = 'fill') +
   facet_grid(~first_gen)+
   scale_fill_viridis_d() +
-  labs(title = 'Proportion of First Major Division', x = 'Number of Majors', y = 'Percent') +
+  labs(title = 'Proportion of First Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of First Major') +
   scale_x_discrete(limits = 1)
 ```
 
@@ -65,7 +64,7 @@ ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)
   geom_bar(position = 'fill') +
   facet_grid(~first_gen)+
   scale_fill_viridis_d() +
-  labs(title = 'Proportion of Second Major Division', x = 'Number of Majors', y = 'Percent') +
+  labs(title = 'Proportion of Second Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of Second Major') +
   scale_x_discrete(limits = 2)
 ```
 
@@ -76,7 +75,7 @@ ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)
   geom_bar(position = 'fill') +
   facet_grid(~first_gen)+
   scale_fill_viridis_d() +
-  labs(title = 'Proportion of Third Major Division', x = 'Number of Majors', y = 'Percent') +
+  labs(title = 'Proportion of Third Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of Third Major') +
   scale_x_discrete(limits = 3)
 ```
 
@@ -88,7 +87,7 @@ ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill 
   scale_fill_viridis_d() +
   labs(title = 'Fine Arts Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Fine Arts First Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Fine Arts First Major', x = 'Type of Student', y = 'Percent', fill = 'Fine Arts Major')
 ```
 
 ## First Major: Humanities
@@ -99,7 +98,7 @@ ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill
   scale_fill_viridis_d() +
   labs(title = 'Humanities Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Humanities First Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Humanities First Major', x = 'Type of Student', y = 'Percent', fill = 'Humanities Major')
 
 ```
 
@@ -111,7 +110,7 @@ ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_ge
   scale_fill_viridis_d() +
   labs(title = 'Interdisciplinary Major Distribution')+ 
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Interdisciplinary First Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Interdisciplinary First Major', x = 'Type of Student', y = 'Percent', fill = 'Interdisciplinary Major')
 
 ```
 
@@ -123,7 +122,7 @@ ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), a
   scale_fill_viridis_d() +
   labs(title = 'Natural Sciences and Mathematics Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Natural Sciences and Mathematics First Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics First Major', x = 'Type of Student', y = 'Percent', fill = 'Natural Sciences and Mathematics Major')
 ```
 
 ## First Major: Social Sciences
@@ -134,7 +133,7 @@ ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen,
   scale_fill_viridis_d() +
   labs(title = 'Social Sciences Major Distribution')+
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Social Sciences First Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Social Sciences First Major', x = 'Type of Student', y = 'Percent', fill = 'Social Sciences Major')
 ```
 
 ## Second Major: Fine Arts
@@ -145,7 +144,7 @@ ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill 
   scale_fill_viridis_d() +
   labs(title = 'Fine Arts Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Fine Arts Second Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Fine Arts Second Major', x = 'Type of Student', y = 'Percent', fill = 'Fine Arts Major')
 ```
 
 ## Second Major: Humanities
@@ -156,7 +155,7 @@ ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill
   scale_fill_viridis_d() +
   labs(title = 'Humanities Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Humanities Second Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Humanities Second Major', x = 'Type of Student', y = 'Percent', fill = 'Humanities Major')
 ```
 
 ## Second Major: Interdisciplinary
@@ -167,7 +166,7 @@ ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_ge
   scale_fill_viridis_d()+
   labs(title = 'Interdisciplinary Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Interdisciplinary Second Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Interdisciplinary Second Major', x = 'Type of Student', y = 'Percent', fill = 'Interdisciplinary Major')
 ```
 
 ## Second Major: Natural Sciences and Mathematics
@@ -178,7 +177,7 @@ ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), a
   scale_fill_viridis_d() +
   labs(title = 'Natural Science and Mathematics Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Natural Sciences and Mathematics Second Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics Second Major', x = 'Type of Student', y = 'Percent', fill = 'Natural Sciences and Mathematics Major')
 ```
 
 ## Second Major: Social Sciences
@@ -190,7 +189,7 @@ ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen,
   scale_fill_viridis_d() +
   labs(title = 'Social Sciences Major Distribution') +
   facet_wrap(~sex) +
-  labs(title = 'Proportion of Students with Social Sciences Second Major', x = 'Type of Student', y = 'Percent')
+  labs(title = 'Proportion of Students with Social Sciences Second Major', x = 'Type of Student', y = 'Percent', fill = 'Social Sciences Major')
 ```
 
 ## Studied Away By Sex
@@ -200,7 +199,7 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
   geom_bar(position = 'Fill') +
   facet_grid(~first_gen) +
   scale_fill_viridis_d() +
-  labs(title = 'Proportion of Students Who Studied Abroad', x = 'Stayed Home or Studied Abroad', y = 'Percent') +
+  labs(title = 'Proportion of Students Who Studied Abroad', x = 'Stayed Home or Studied Abroad', y = 'Percent', fill = 'Sex') +
   scale_x_discrete(limits = c(0, 1), labels = c('Home', 'Abroad'))
 ```
 
