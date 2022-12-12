@@ -67,6 +67,7 @@ annotate_figure(year_fig,
                 left = 'Count', 
                 right = '')
 ```
+The first thing to notice about first gen students is that they don't make up a large portion of the student body in any given year. The only data available on the first gen status of students is from the 2016-2017 and the 2017-2018 classes, and even those data aren't fully complete. From the data available, it appears that about 10% of any given class is made up of first gen students, though the true rate could vary due to the amount of students whose status is unavailable.
 
 #### Sex
 
