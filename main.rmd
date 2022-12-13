@@ -4,8 +4,8 @@ author: "Kynan Desouza-Chen, Devi Naum, and William St. John"
 date: "December 14, 2022"
 output: 
   prettydoc::html_pretty:
-      theme: cyborg
-      toc: true
+      theme: caymen
+      toc: false
       toc_float: false
 ---
 
@@ -49,6 +49,7 @@ Surprisingly, most of the data has no information about whether or not a student
 
 ## The Sample
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p <- ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   geom_bar() +
@@ -58,14 +59,13 @@ p <- ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
 
 ggplotly(p)
 ```
+</center>
 
--   Approximately 120 first gen graduates
--   Not a lot of first gen data till 2016
--   Very specific sample
--   Drop the NA (need to do this)
+The first thing to notice about the macalester major data provided is that there is nearly no data concerning first generation status until the class of 2017. Even then, there is a significant portion of the data missing. It is important to acknowledge that the data we used is limited, so the results of the analysis are not predictive. Rather, they are interesting trends that could be analyzed further once more data becomes available.
 
 ## The Sample: Limited
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p1 <- ggplot(fgen, aes(x=first_gen, fill = sex)) +
   geom_bar() +
@@ -75,11 +75,13 @@ p1 <- ggplot(fgen, aes(x=first_gen, fill = sex)) +
 
 ggplotly(p1)
 ```
+</center>
 
--   Overall More Females than Males
+If we limit the scope of the data to students who are confirmed first gen or not first gen, there are some interesting points to note. First, you’ll notice that the plots are faceted by year, and they include bars split into male identifying and female identifying students. It is unclear how non-binary students were classified, but we must work with the limitations of the data provided. In terms of gender distributions, every category has a similar ratio of female students to male students, excluding the data from the class of 2016, which contains 1 student. There are more females than males, as is the case not just with Macalester, but with higher education in general.
 
 ## First Gen Majors: Major 1
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p2 <- ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)) +
   geom_bar(position = 'fill') +
@@ -90,9 +92,13 @@ p2 <- ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_div
 
 ggplotly(p2)
 ```
+</center>
+
+As we start comparing the first major divisions between first generation and non-first generation students, we can see some notable differences in the major divisions chosen by the two groups. First generation students tend to pursue more majors in the Natural Sciences and Mathematics division in comparison with the non-first generation students. One thing to note is that we used the listed major 1 as first majors. This may not necessarily be accurate, as a person might not “value” a major more just because they declared it first, but there was not perfect way to adjust for double and triple majors.
 
 ## First Gen Majors: Major 2
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p3 <- ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)) +
   geom_bar(position = 'fill') +
@@ -103,9 +109,13 @@ p3 <- ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_div
 
 ggplotly(p3)
 ```
+</center>
+
+A similar trend of first gen students choosing STEM majors at a higher rate then non-STEM majors exists when examining the distribution of 2nd declared major divisions.
 
 ## First Gen Majors: Major 3
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p4 <- ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)) +
   geom_bar(position = 'fill') +
@@ -116,9 +126,13 @@ p4 <- ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_div
 
 ggplotly(p4)
 ```
+</center>
+
+None of the first gen students triple majored, so no comparisons can be drawn, but that in and of itself is interesting. It is not completely surprising since there were very few triple majors in the dataset to begin with, but it would be fun to see if this trend holds over time.
 
 ## First Major: Fine Arts
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p5 <- ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'Fill') +
@@ -129,9 +143,13 @@ p5 <- ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen,
 
 ggplotly(p5)
 ```
+</center>
+
+It is difficult to analyze trends among first gen fine art majors since the sample size is so small, and there were no male identifying fine arts majors. This is something to note, but it is not unreasonable given the small sample of first gen students along with the small rate of fine arts majors.
 
 ## First Major: Humanities
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p6 <- ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'Fill') +
@@ -142,9 +160,13 @@ p6 <- ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen
 
 ggplotly(p6)
 ```
+</center>
+
+First gen humanities majors tended to have less variety in the majors they took compared to non first gen humanities majors for both males and females. Another thing of note is that none of the first gen male students took any language majors except Russian studies, where there were roughly quadruple the rate as opposed to non first gen males. There was also a considerably higher rate of philosophy majors among first gen students. The fact the some majors are not represented among first gen students may be attributable to the small sample size, so more data is needed
 
 ## First Major: Interdisciplinary
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p7 <- ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'Fill') +
@@ -155,9 +177,13 @@ p7 <- ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = fi
 
 ggplotly(p7)
 ```
+</center>
+
+The distributions of majors within the interdisciplinary division are remarkably similar between first gen and non first gen female students, with the only significant variations being environmental studies and latin american studies, but even those are reasonably similar. Meanwhile, the rate of male first gen students that took american studies is much higher than the rate among non first gen students, and no male first gen students took media and cultural studies of WGSS, though that could also be an issue of sample size.
 
 ## First Major: Natural Sciences and Mathematics
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p8 <- ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'Fill') +
@@ -168,9 +194,13 @@ p8 <- ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematic
 
 ggplotly(p8)
 ```
+</center>
+
+In first gen and non first gen students have similar distributions in STEM fields, although there are no first gen male chem or geology majors while there are a marginal amount of those among non first gen males. Similarly, first gen and non first gen females have similar distributions in STEM majors other than the lack of compsci majors among first gen female students.
 
 ## First Major: Social Sciences
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p9 <- ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen, fill = major1)) +
   geom_bar(position = 'fill') +
@@ -181,9 +211,13 @@ p9 <- ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = firs
 
 ggplotly(p9)
 ```
+</center>
+
+There are no first gen male psychology or anthropology majors, and geography is much less popular among first gen males compared to non first gen males. Meanwhile, sociology and poly sci are significantly more popular among this group. Female first gen students have a very similar distribution to female non first gen students except for the fact that sociology is again more popular among first gen students, and anthropology is nearly nonexistent.
 
 ## Second Major: Fine Arts
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p10 <- ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
@@ -194,9 +228,13 @@ p10 <- ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen
 
 ggplotly(p10)
 ```
+</center>
+
+The first noticeable difference in this graphic is the lack of any male students choosing a Fine Arts second major as all of the individuals in this sample are female. Furthermore, all of the students with a Fine Arts second major always appear to choose an Arts major compared to the other non-first generation students who may choose three different Fine Arts majors.
 
 ## Second Major: Humanities
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p11 <- ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
@@ -207,9 +245,13 @@ p11 <- ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_ge
 
 ggplotly(p11)
 ```
+</center>
+
+FIrst generation students have a much less diverse set of second majors in the Humanities division compared to the other students. Yet again, the sample size of first gen students is far smaller than the non-first gen students, making it difficult to point out trends. Nevertheless, the first gen students chose to take either Asian Language and Cultures, Classics or Russian Studies. On the other hand, the non-first generation female students took 11 different Humanities majors as their second majors while the males took 7 different majors with Asian Language and Cultures and Philosophy being quite common.
 
 ## Second Major: Interdisciplinary
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p12 <- ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
@@ -220,9 +262,13 @@ p12 <- ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = f
 
 ggplotly(p12)
 ```
+</center>
+
+In this category, the first generation female and male students take the same Interdisciplinary majors (Educational Studies and Environmental Studies) at about the same ratio between the genders. These two majors seem to be the most common in non-first generation students with the Media and Cultural Studies major also making an appearance in both female and male.
 
 ## Second Major: Natural Sciences and Mathematics
 
+<center>
 ```{r echo=FALSE, fig.align="center"}
 p13 <- ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'Fill') +
@@ -233,9 +279,13 @@ p13 <- ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathemati
 
 ggplotly(p13)
 ```
+</center>
+
+First generation female students appear to choose Neuroscience Studies the most often as their second major in this division. This major is also common in both female and male non-first generation students. However, there are no first generation male students taking this major. What seems to be common for them is either Physics or Biology as a second major for this division, quite different from the other groups.
 
 ## Second Major: Social Sciences
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p14 <- ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
   geom_bar(position = 'fill') +
@@ -246,9 +296,13 @@ p14 <- ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = fir
 
 ggplotly(p14)
 ```
+</center>
+
+The Economics major seems to be very common among all the groups, except for female first generation students. However, Psychology seems to be a popular second major choice for all the groups in this division, while the Sociology major seems to barely have any individuals. Another interesting thing to note is how male first generation students tend to take only two of the six Social Sciences majors which are Economics or Political Science.
 
 ## Studied Away By Sex
 
+<center>
 ```{r, echo=FALSE, fig.align="center"}
 p15 <- ggplot(fgen, aes(x = studied_away, fill = sex)) +
   geom_bar(position = 'Fill') +
@@ -259,8 +313,12 @@ p15 <- ggplot(fgen, aes(x = studied_away, fill = sex)) +
 
 ggplotly(p15)
 ```
+</center>
+
+In this graphic, we can observe how female students both first and non-first generation tend to study abroad more than male students. However, the ratio of non-study abroad students between females and males tends to be about the same.
 
 ## Classification Tree
+
 ```{r, echo=FALSE, fig.align="center"}
 library(rpart)
 library(rpart.plot)
@@ -294,6 +352,8 @@ fit <- rpart(sex~., data = data_train, method = "class")
 
 rpart.plot(fit, extra = 106)
 ```
+
+We initially attempted to make a classification tree to try and predict the first generation status of students whom there was not first gen data on. We managed to make a tree, but we ran into limitations when trying to use the tree to make predictions due to the insufficient data available. Since there was not enough data to fully train the classification tree, there were some data points that it couldn’t predict, which meant that we weren’t able to utilize the classification tree for its usual purpose. Instead, we used it to identify splits in the data that we wanted to explore further.
 
 ## Conclusions
 -   No Triple Majors
