@@ -44,7 +44,10 @@ Surprisingly, most of the data has no information about whether or not a student
 
 ## The Sample
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.width = 12}
+fgen$first_gen <- factor(fgen$first_gen, levels = c("first gen", "not first gen"), 
+                  labels = c("First Gen", "Not First Gen"))
+
 ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   geom_bar() +
   facet_grid(~grad_year) +
