@@ -1,5 +1,4 @@
 ---
----
 title: "First Generation Macalester College Majors"
 author: "Kynan Desouza-Chen, Devi Naum, and William St. John"
 date: "December 14, 2022"
