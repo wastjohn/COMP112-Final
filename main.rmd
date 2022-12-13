@@ -1,6 +1,6 @@
 ---
-title: "main"
-author: "WillStJohn"
+title: "Final Report"
+author: "Will St. John, Kynan Desouza-Chen, Devi Naum"
 date: "2022-11-04"
 output: html_document
 ---
@@ -269,10 +269,12 @@ rpart.plot(fit, extra = 106)
 -   Fewer first gen students overall
 -   First Gen records begin later
 -   More females than males
+-   No third majors for first gen students
+-   Most common first, second and third major division are Natural Sciences and Mathematics
 
 ## Limitations/Assumptions
 -   Small sample size
--   
+-   Skewed results due to there being more female students
 
 
 
