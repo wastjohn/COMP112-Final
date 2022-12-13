@@ -4,6 +4,9 @@ The Macalester Department of Institutional Research provided this data about on 
 
 The aim of this project is to analyze the differences between self-identifying first generation students and non first generation students by examining various graphics.
 
+### To access this repository online
+- https://wastjohn.github.io/COMP112-Final/
+
 ### To access the data
 - majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
 
