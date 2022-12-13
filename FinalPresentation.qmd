@@ -203,7 +203,7 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
   scale_x_discrete(limits = c(0, 1), labels = c('Home', 'Abroad'))
 ```
 
-## Conclusions
+## Conclusions {.scrollable}
 -   No Triple Majors
 -   No Males in Fine Arts
 -   No Theater or Dance Majors
@@ -211,12 +211,12 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 -   No Males Anthropology or Psychology
 -   Males Like Econ
 -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
--   No Females in Russian or Relgious Studies
+-   No Females in Russian or Religous Studies
 -   No Women/Gender Studies
 -   Biology popular in Females
 
 
-## Limitations/Assumptions
+## Limitations/Assumptions {.scrollable}
 -   Small sample size
 -   Fewer first gen students overall
 -   First Gen records begin later
