@@ -4,10 +4,10 @@ The Macalester Department of Institutional Research provided this data about on 
 
 The aim of this project is to analyze the differences between self-identifying first generation students and non first generation students by examining various graphics.
 
-### To access this repository's blog online
+### To access this repository's online blog
 - https://wastjohn.github.io/COMP112-Final/
 
-### To access this repository's presentation online
+### To access this repository's online presentation
 - https://wastjohn.github.io/COMP112-Final/slides.html
 
 ### To access the data
