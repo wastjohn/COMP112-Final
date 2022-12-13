@@ -51,11 +51,14 @@ Surprisingly, most of the data has no information about whether or not a student
 
 <center>
 ```{r, echo=FALSE, fig.align="center"}
+majors$first_gen[is.na(majors$first_gen)] <- "Unknown"
 p <- ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
   geom_bar() +
   facet_grid(~grad_year) +
   scale_fill_viridis_d() +
-  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
+  scale_x_discrete(breaks = c('first gen', 'not first gen', 'Unknown'), labels = c('First Gen','Not First Gen','Unknown')) +
+  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex') +
+  theme(axis.text.x = element_text(angle = 90))
 
 ggplotly(p)
 ```
