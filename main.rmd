@@ -355,7 +355,7 @@ rpart.plot(fit, extra = 106)
 
 We initially attempted to make a classification tree to try and predict the first generation status of students whom there was not first gen data on. We managed to make a tree, but we ran into limitations when trying to use the tree to make predictions due to the insufficient data available. Since there was not enough data to fully train the classification tree, there were some data points that it couldn’t predict, which meant that we weren’t able to utilize the classification tree for its usual purpose. Instead, we used it to identify splits in the data that we wanted to explore further.
 
-## Conclusions
+## Conclusions 
 -   No Triple Majors
 -   No Males in Fine Arts
 -   No Theater or Dance Majors
@@ -368,7 +368,7 @@ We initially attempted to make a classification tree to try and predict the firs
 -   Biology popular in Females
 
 
-## Limitations/Assumptions
+## Limitations/Assumptions 
 -   Small sample size
 -   Fewer first gen students overall
 -   First Gen records begin later
