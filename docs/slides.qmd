@@ -1,0 +1,261 @@
+---
+title: "First Gen Students: A Different Experience"
+format: revealjs
+editor: visual
+---
+
+## The Data
+
+-   Provided by Macalester's Institutional Research office
+-   Data regarding previous graduated students from Fall 2013 to Spring 2018
+-   Approximately 2500 total students
+-   First generation college students are students who are the first in their families to attend college
+
+## The Sample {.smaller}
+
+```{r, include=FALSE, echo=FALSE}
+library(readr)
+library(ggplot2)
+library(tidyverse)
+library(ggpubr)
+majors <- read_csv("https://raw.githubusercontent.com/wastjohn/COMP112-Final/main/majordata.csv")
+fgen <- majors %>% filter(is.na(first_gen) == FALSE)
+```
+
+```{r, echo=FALSE}
+ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
+  geom_bar() +
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d() +
+  labs(title = 'First Gen Distribution by Sex from Fall 2013 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
+```
+
+-   Approximately 120 first gen graduates
+-   Not any first gen data till 2016
+-   Very specific sample
+
+## The Sample: Limited {.smaller}
+
+```{r}
+ggplot(fgen, aes(x=first_gen, fill = sex)) +
+  geom_bar() + #add position = fill for a prop bar chart
+  facet_grid(~grad_year) +
+  scale_fill_viridis_d() +
+  labs(title = 'First Gen Distribution by Sex from Fall 2015 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
+```
+
+-   Overall More Females than Males
+-   Similar ratio of female students to male students
+
+## First Gen Majors: Major 1 {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of First Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of First Major') +
+  scale_x_discrete(limits = 1)
+```
+
+-   First gen students pursue more majors in the Natural Sciences and Mathematics division
+
+## First Gen Majors: Major 2 {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Second Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of Second Major') +
+  scale_x_discrete(limits = 2)
+```
+
+-   Similar trend of first gen students choosing STEM majors at a higher rate than non-STEM majors
+
+## First Gen Majors: Major 3 {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)) +
+  geom_bar(position = 'fill') +
+  facet_grid(~first_gen)+
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Third Major Division', x = 'Number of Majors', y = 'Percent', fill = 'Division of Third Major') +
+  scale_x_discrete(limits = 3)
+```
+
+-   None of the first gen students triple majored
+
+## First Major: Fine Arts {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Fine Arts First Major', x = 'Type of Student', y = 'Percent', fill = 'Fine Arts Major')
+```
+
+-    No male-identifying fine arts majors
+
+## First Major: Humanities {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Humanities First Major', x = 'Type of Student', y = 'Percent', fill = 'Humanities Major')
+
+```
+
+-   No first gen male students took any language majors except Russian studies
+-   Higher rate of philosophy majors among first gen students
+
+## First Major: Interdisciplinary {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Interdisciplinary Major Distribution')+ 
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Interdisciplinary First Major', x = 'Type of Student', y = 'Percent', fill = 'Interdisciplinary Major')
+
+```
+
+-   Male first gen students took American Studies more often than non-first gen students
+-   No male first gen students took Media and Cultural Studies or WGSS
+
+## First Major: Natural Sciences and Mathematics {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Sciences and Mathematics Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics First Major', x = 'Type of Student', y = 'Percent', fill = 'Natural Sciences and Mathematics Major')
+```
+
+-   No male first gen students taking Chemistry or Geology majors
+-   No Computer Science majors among first gen female students
+
+## First Major: Social Sciences {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen, fill = major1)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution')+
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Social Sciences First Major', x = 'Type of Student', y = 'Percent', fill = 'Social Sciences Major')
+```
+
+-   No first gen male students taking Psychology or Anthropology majors
+-   Female students choose Psychology more often than male students
+
+## Second Major: Fine Arts {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Fine Arts Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Fine Arts Second Major', x = 'Type of Student', y = 'Percent', fill = 'Fine Arts Major')
+```
+
+-   No male students choosing a Fine Arts second major
+-   First gen students with a Fine Arts second major always appear to choose an Arts major
+
+## Second Major: Humanities {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Humanities Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Humanities Second Major', x = 'Type of Student', y = 'Percent', fill = 'Humanities Major')
+```
+
+-   First gen students have a less diverse set of second majors in the Humanities division
+
+## Second Major: Interdisciplinary {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d()+
+  labs(title = 'Interdisciplinary Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Interdisciplinary Second Major', x = 'Type of Student', y = 'Percent', fill = 'Interdisciplinary Major')
+```
+
+-   First generation students take the same Interdisciplinary majors at about the same ratio between the genders
+
+## Second Major: Natural Sciences and Mathematics {.smaller}
+
+```{r}
+ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'Fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Natural Science and Mathematics Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Natural Sciences and Mathematics Second Major', x = 'Type of Student', y = 'Percent', fill = 'Natural Sciences and Mathematics Major')
+```
+
+-   First generation female students appear to choose Neuroscience Studies the most
+-   First generation male students seem to choose Biology and Physics more often
+
+## Second Major: Social Sciences {.smaller}
+
+```{r}
+
+ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen, fill = major2)) +
+  geom_bar(position = 'fill') +
+  scale_fill_viridis_d() +
+  labs(title = 'Social Sciences Major Distribution') +
+  facet_wrap(~sex) +
+  labs(title = 'Proportion of Students with Social Sciences Second Major', x = 'Type of Student', y = 'Percent', fill = 'Social Sciences Major')
+```
+
+-   Economics and Political Science majors are common among all the groups
+-   Economics is less common for first generation female students
+
+## Studied Away By Sex {.smaller}
+
+```{r}
+ggplot(fgen, aes(x = studied_away, fill = sex)) +
+  geom_bar(position = 'Fill') +
+  facet_grid(~first_gen) +
+  scale_fill_viridis_d() +
+  labs(title = 'Proportion of Students Who Studied Abroad', x = 'Stayed Home or Studied Abroad', y = 'Percent', fill = 'Sex') +
+  scale_x_discrete(limits = c(0, 1), labels = c('Home', 'Abroad'))
+```
+
+-   Both first and non-first generation female students tend to study abroad more than male students
+
+## Conclusions {.scrollable .smaller}
+
+-   Overall  
+    -   No Triple Majors
+    -   No Theater, Dance, or WGS Majors
+    -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
+-   Males
+    -   No Majors in Fine Arts, Anthropology, or Psychology
+    -   Prefer Econ
+-   Females
+    -   No Majors in Physics, Russian Studies, or Religious Studies
+    -   Prefer Biology
+
+## Limitations/Assumptions {.scrollable}
+
+-   Small sample size
+-   Fewer first gen students overall
+-   First Gen records begin later
+-   More females than males
+-   Forms were filled out correctly
