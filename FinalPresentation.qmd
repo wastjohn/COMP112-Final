@@ -34,7 +34,7 @@ ggplot(majors, aes(x=first_gen, fill = sex)) + #add fill = sex maybe?
 -   Not any first gen data till 2016
 -   Very specific sample
 
-## The Sample: Limited
+## The Sample: Limited {.smaller}
 
 ```{r}
 ggplot(fgen, aes(x=first_gen, fill = sex)) +
@@ -47,7 +47,7 @@ ggplot(fgen, aes(x=first_gen, fill = sex)) +
 -   Overall More Females than Males
 -   Similar ratio of female students to male students
 
-## First Gen Majors: Major 1
+## First Gen Majors: Major 1 {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)) +
@@ -59,7 +59,8 @@ ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)
 ```
 
 -   First gen students pursue more majors in the Natural Sciences and Mathematics division
-## First Gen Majors: Major 2
+
+## First Gen Majors: Major 2 {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)) +
@@ -71,7 +72,8 @@ ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)
 ```
 
 -   Similar trend of first gen students choosing STEM majors at a higher rate than non-STEM majors
-## First Gen Majors: Major 3
+
+## First Gen Majors: Major 3 {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)) +
@@ -83,7 +85,8 @@ ggplot(fgen %>% filter(major_ct == 3), aes(x = major_ct, fill = major3_division)
 ```
 
 -   None of the first gen students triple majored
-## First Major: Fine Arts
+
+## First Major: Fine Arts {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill = major1)) +
@@ -95,7 +98,8 @@ ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill 
 ```
 
 -    No male-identifying fine arts majors
-## First Major: Humanities
+
+## First Major: Humanities {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill = major1)) +
@@ -109,7 +113,8 @@ ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill
 
 -   No first gen male students took any language majors except Russian studies
 -   Higher rate of philosophy majors among first gen students
-## First Major: Interdisciplinary
+
+## First Major: Interdisciplinary {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_gen, fill = major1)) +
@@ -123,7 +128,8 @@ ggplot(fgen %>% filter(major1_division == 'Interdisciplinary'), aes(x = first_ge
 
 -   Male first gen students took American Studies more often than non-first gen students
 -   No male first gen students took Media and Cultural Studies or WGSS
-## First Major: Natural Sciences and Mathematics
+
+## First Major: Natural Sciences and Mathematics {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major1)) +
@@ -136,7 +142,8 @@ ggplot(fgen %>% filter(major1_division == 'Natural Sciences and Mathematics'), a
 
 -   No male first gen students taking Chemistry or Geology majors
 -   No Computer Science majors among first gen female students
-## First Major: Social Sciences
+
+## First Major: Social Sciences {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen, fill = major1)) +
@@ -149,7 +156,8 @@ ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen,
 
 -   No first gen male students taking Psychology or Anthropology majors
 -   Female students choose Psychology more often than male students
-## Second Major: Fine Arts
+
+## Second Major: Fine Arts {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill = major2)) +
@@ -162,7 +170,8 @@ ggplot(fgen %>% filter(major2_division == 'Fine Arts'), aes(x = first_gen, fill 
 
 -   No male students choosing a Fine Arts second major
 -   First gen students with a Fine Arts second major always appear to choose an Arts major
-## Second Major: Humanities
+
+## Second Major: Humanities {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill = major2)) +
@@ -174,7 +183,8 @@ ggplot(fgen %>% filter(major2_division == 'Humanities'), aes(x = first_gen, fill
 ```
 
 -   First gen students have a less diverse set of second majors in the Humanities division
-## Second Major: Interdisciplinary
+
+## Second Major: Interdisciplinary {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_gen, fill = major2)) +
@@ -186,7 +196,8 @@ ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_ge
 ```
 
 -   First generation students take the same Interdisciplinary majors at about the same ratio between the genders
-## Second Major: Natural Sciences and Mathematics
+
+## Second Major: Natural Sciences and Mathematics {.smaller}
 
 ```{r}
 ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), aes(x = first_gen, fill = major2)) +
@@ -199,7 +210,8 @@ ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), a
 
 -   First generation female students appear to choose Neuroscience Studies the most
 -   First generation male students seem to choose Biology and Physics more often
-## Second Major: Social Sciences
+
+## Second Major: Social Sciences {.smaller}
 
 ```{r}
 
@@ -213,7 +225,8 @@ ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen,
 
 -   Economics and Political Science majors are common among all the groups
 -   Economics is less common for first generation female students
-## Studied Away By Sex
+
+## Studied Away By Sex {.smaller}
 
 ```{r}
 ggplot(fgen, aes(x = studied_away, fill = sex)) +
@@ -225,18 +238,19 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 ```
 
 -   Both first and non-first generation female students tend to study abroad more than male students
+
 ## Conclusions {.scrollable .smaller}
 
--   No Triple Majors
--   No Males in Fine Arts
--   No Theater or Dance Majors
--   No Females in Physics
--   No Males Anthropology or Psychology
--   Males Like Econ
--   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
--   No Females in Russian or Religous Studies
--   No Women/Gender Studies
--   Biology popular in Females
+-   Overall  
+    -   No Triple Majors
+    -   No Theater, Dance, or WGS Majors
+    -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
+-   Males
+    -   No Majors in Fine Arts, Anthropology, or Psychology
+    -   Prefer Econ
+-   Females
+    -   No Majors in Physics, Russian Studies, or Religious Studies
+    -   Prefer Biology
 
 ## Limitations/Assumptions {.scrollable}
 
