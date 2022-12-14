@@ -294,7 +294,7 @@ ggplotly(p13)
 ```
 </center>
 
-**First generation female students appear to choose Neuroscience Studies the most often as their second major in this division.** This major is also common in both female and male non-first generation students. On the other hand, **the most common majors for first generation male students are Biology and Physics**. Interestingly, Computer Science is much more common in non-first generation students.
+**First generation female students appear to choose Mathematics the most often as their second major in this division.** This major is also common in both female and male non-first generation students. On the other hand, **the most common majors for first generation male students are Biology and Physics**. Interestingly, Computer Science is much more common in non-first generation students.
 
 ## Second Major: Social Sciences
 
@@ -378,7 +378,7 @@ We initially attempted to make a classification tree to try and predict the firs
     -   Prefer: Econ (1st), Biology (2nd), and Physics (2nd)
 -   Females
     -   No Majors: Physics, Geology, History, Philosophy, Russian Studies, or Religious Studies
-    -   Prefer: Biology (1st), Psychology (1st), Neuroscience (2nd), and Art (2nd)
+    -   Prefer: Biology (1st), Psychology (1st), Mathematics (2nd), and Art (2nd)
     -   More study abroad
 
 

@@ -213,7 +213,7 @@ ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), a
   labs(title = 'Proportion of Students with Natural Sciences and Mathematics Second Major', x = 'Type of Student', y = 'Percent', fill = 'Natural Sciences and Mathematics Major')
 ```
 
--   Neuroscience is a popular second major for first gen female students
+-   Mathematics is a popular second major for first gen female students
 -   Biology and Physics are popular second majors for first gen male students
 
 
@@ -257,7 +257,7 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
     -   Prefer: Econ (1st), Biology (2nd), and Physics (2nd)
 -   Females
     -   No Majors: Physics, Geology, History, Philosophy, Russian Studies, or Religious Studies
-    -   Prefer: Biology (1st), Psychology (1st), Neuroscience (2nd), and Art (2nd)
+    -   Prefer: Biology (1st), Psychology (1st), Mathematics (2nd), and Art (2nd)
     -   More study abroad
 
 
