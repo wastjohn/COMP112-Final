@@ -60,7 +60,6 @@ ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)
 
 -   First gen students pursue more majors in the Natural Sciences and Mathematics division
 
-
 ## First Gen Majors: Major 2 {.smaller}
 
 ```{r}
@@ -73,7 +72,6 @@ ggplot(fgen %>% filter(major_ct == 2), aes(x = major_ct, fill = major2_division)
 ```
 
 -   Similar trend of first gen students choosing STEM majors at a higher proportion than non-STEM majors
-
 
 ## First Gen Majors: Major 3 {.smaller}
 
@@ -115,7 +113,6 @@ ggplot(fgen %>% filter(major1_division == 'Humanities'), aes(x = first_gen, fill
 
 -   No first gen male students majored in any foreign languages
 -   No first gen female students majored in History, Philosophy, Religious Studies, Russian, or Spanish
-
 
 ## First Major: Interdisciplinary {.smaller}
 
@@ -160,7 +157,6 @@ ggplot(fgen %>% filter(major1_division == 'Social Sciences'), aes(x = first_gen,
 -   No first gen male students majors in Psychology or Anthropology
 -   High proportion of female Psychology majors
 
-
 ## Second Major: Fine Arts {.smaller}
 
 ```{r}
@@ -201,7 +197,6 @@ ggplot(fgen %>% filter(major2_division == 'Interdisciplinary'), aes(x = first_ge
 
 -   First generation students take the same Interdisciplinary majors at about the same ratio between the genders
 
-
 ## Second Major: NSM {.smaller}
 
 ```{r}
@@ -215,7 +210,6 @@ ggplot(fgen %>% filter(major2_division == 'Natural Sciences and Mathematics'), a
 
 -   Neuroscience is a popular second major for first gen female students
 -   Biology and Physics are popular second majors for first gen male students
-
 
 ## Second Major: Social Sciences {.smaller}
 
@@ -232,7 +226,6 @@ ggplot(fgen %>% filter(major2_division == 'Social Sciences'), aes(x = first_gen,
 -   Economics and Political Science majors are common among most the students
     -   Less common for first generation female students
 
-
 ## Studied Away By Sex {.smaller}
 
 ```{r}
@@ -246,7 +239,6 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 
 -   Female students tend to study abroad more than male students
 
-
 ## Conclusions {.scrollable .smaller}
 
 -   Overall
@@ -254,12 +246,11 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
     -   Low Selection Diversity Overall in Second Major (except STEM and Social Science Female Majors)
 -   Males
     -   No Majors: Fine Arts, Anthropology, Psychology, Chemistry, Geology, or foreign languages
-    -   Prefer: Econ (1st), Biology (2nd), and Physics (2nd)
+    -   Prefer: Econ (1st), Biology (2nd), and Physics (3rd)
 -   Females
     -   No Majors: Physics, Geology, History, Philosophy, Russian Studies, or Religious Studies
     -   Prefer: Biology (1st), Psychology (1st), Neuroscience (2nd), and Art (2nd)
     -   More study abroad
-
 
 ## Limitations/Assumptions {.scrollable}
 
