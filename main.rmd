@@ -9,6 +9,11 @@ output:
       toc_float: false
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
+
 
 ```{r, include=FALSE, echo=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -24,7 +29,7 @@ fgen <- majors %>% filter(is.na(first_gen) == FALSE)
 
 # First Generation Macalester College Majors
 
-### What do we mean by "First Generation?" *A note about the data*
+### What do we mean by "First Generation"? *A note about the data*
 
 **First generation college students are students who are the first in their families to attend college.** In terms of this research, first generation students are those who identify as “first gen” on Macalester forms utilized by Macalester’s Institutional Research office. *The Institutional Research office provided us with the data set used in this research.*
 
@@ -148,7 +153,7 @@ ggplotly(p5)
 ```
 </center>
 
-It is difficult to analyze trends among first gen fine art majors since the sample size is so small, and there were **no male-identifying fine arts majors**. This is something to note, but it is not unreasonable given the small sample of first gen students along with the small rate of fine arts majors.
+It is difficult to analyze trends among first gen fine art majors since the sample size is so small, and there were **no male-identifying Fine Arts majors**. This is something to note, but it is not unreasonable given the small sample of first gen students along with the small rate of Fine Arts majors.
 
 ## First Major: Humanities
 
@@ -165,7 +170,7 @@ ggplotly(p6)
 ```
 </center>
 
-First gen humanities majors tended to have less variety in the majors they took compared to non first gen humanities majors for both males and females. Another thing of note is that **none of the first gen male students took any language majors except Russian studies**, where there was roughly quadruple the rate as opposed to non first gen males. There was also a considerably **higher rate of philosophy majors among first gen students**. The fact that some majors are not represented among first gen students may be attributable to the small sample size, so more data is needed.
+First gen humanities majors tended to have less variety in the majors they took compared to non first gen humanities majors for both males and females. Another thing of note is that **none of the first gen male students took any language majors except Russian Studies**, where there was roughly quadruple the rate as opposed to non first gen males. There was also a considerably **higher rate of Philosophy majors among first gen students**. The fact that some majors are not represented among first gen students may be attributable to the small sample size, so more data is needed.
 
 ## First Major: Interdisciplinary
 
@@ -182,7 +187,7 @@ ggplotly(p7)
 ```
 </center>
 
-The **distributions of majors within the interdisciplinary division are remarkably similar between first gen and non first gen female students**, with the only significant variations being environmental studies and Latin American studies, but even those are reasonably similar. Meanwhile, the **rate of male first gen students that took American studies is much higher than the rate among non first gen students**, and no male first gen students took media and cultural studies or WGSS, though that could also be an issue of sample size.
+The **distributions of majors within the Interdisciplinary division are remarkably similar between first gen and non first gen female students**, with the only significant variations being Environmental Studies and Latin American Studies, but even those are reasonably similar. Meanwhile, the **rate of male first gen students that took American Studies is much higher than the rate among non first gen students**, and no male first gen students took Media and Cultural Studies or WGSS, though that could also be an issue of sample size.
 
 ## First Major: Natural Sciences and Mathematics
 
@@ -199,7 +204,7 @@ ggplotly(p8)
 ```
 </center>
 
-In first gen and non first gen students have similar distributions in STEM fields, although there are **no first gen male chem or geology majors while there is a marginal amount of those among non first gen males.** Similarly, first gen and non first gen females have similar distributions in STEM majors other than the **lack of compsci majors among first gen female students.**
+In first gen and non first gen students have similar distributions in STEM fields, although there are **no first gen male taking Chemistry or Geology as a major while there is a marginal amount of those among non first gen males.** Similarly, first gen and non first gen females have similar distributions in STEM majors other than the **lack of Computer Science majors among first gen female students.**
 
 ## First Major: Social Sciences
 
@@ -216,7 +221,7 @@ ggplotly(p9)
 ```
 </center>
 
-There are **no first gen male psychology or anthropology majors**, and geography is much less popular among first gen males compared to non first gen males. Meanwhile, sociology and poly sci are significantly more popular among this group. Female first gen students have a very similar distribution to female non first gen students except for the fact that **sociology is again more popular among first gen students, and anthropology is nearly nonexistent.**
+There are **no first gen male Psychology or Anthropology majors**, and Geography is much less popular among first gen males compared to non first gen males. Meanwhile, Sociology and Political Science are significantly more popular among this group. Female first gen students have a very similar distribution to female non first gen students except for the fact that **Sociology is again more popular among first gen students, while Anthropology is nearly nonexistent.**
 
 ## Second Major: Fine Arts
 
