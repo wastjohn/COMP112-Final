@@ -370,16 +370,16 @@ We initially attempted to make a classification tree to try and predict the firs
 
 
 ## Conclusions 
--   Overall  
-    -   No Triple Majors
-    -   No Theater, Dance, or WGS Majors
-    -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
+-   Overall
+    -   No Triple Majors, Theater, Dance, or WGS Majors
+    -   Low Selection Diversity Overall in Second Major (except STEM and Social Science Female Majors)
 -   Males
-    -   No Majors in Fine Arts, Anthropology, or Psychology
-    -   Prefer Econ
+    -   No Majors: Fine Arts, Anthropology, Psychology, Chemistry, Geology, or foreign languages
+    -   Prefer: Econ (1st), Biology (2nd), and Physics (2nd)
 -   Females
-    -   No Majors in Physics, Russian Studies, or Religious Studies
-    -   Prefer Biology
+    -   No Majors: Physics, Geology, History, Philosophy, Russian Studies, or Religious Studies
+    -   Prefer: Biology (1st), Psychology (1st), Neuroscience (2nd), and Art (2nd)
+    -   More study abroad
 
 
 ## Limitations/Assumptions 

@@ -250,14 +250,8 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 ## Conclusions {.scrollable .smaller}
 
 -   Overall
-<<<<<<< Updated upstream
-    -   No Triple Majors
-    -   No Theater, Dance, or WGS Majors
-    -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)
-=======
     -   No Triple Majors, Theater, Dance, or WGS Majors
     -   Low Selection Diversity Overall in Second Major (except STEM and Social Science Female Majors)
->>>>>>> Stashed changes
 -   Males
     -   No Majors: Fine Arts, Anthropology, Psychology, Chemistry, Geology, or foreign languages
     -   Prefer: Econ (1st), Biology (2nd), and Physics (2nd)
