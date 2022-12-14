@@ -97,7 +97,7 @@ ggplot(fgen %>% filter(major1_division == 'Fine Arts'), aes(x = first_gen, fill 
   labs(title = 'Proportion of Students with Fine Arts First Major', x = 'Type of Student', y = 'Percent', fill = 'Fine Arts Major')
 ```
 
--    No male-identifying fine arts majors
+-   No male-identifying fine arts majors
 
 ## First Major: Humanities {.smaller}
 
@@ -241,7 +241,7 @@ ggplot(fgen, aes(x = studied_away, fill = sex)) +
 
 ## Conclusions {.scrollable .smaller}
 
--   Overall  
+-   Overall
     -   No Triple Majors
     -   No Theater, Dance, or WGS Majors
     -   Low Selection Diversity Overall in Second Major (except Natural Sciences and Mathematics and Females in Social Sciences)

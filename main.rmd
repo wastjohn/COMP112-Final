@@ -77,6 +77,7 @@ p1 <- ggplot(fgen, aes(x=first_gen, fill = sex)) +
   geom_bar() +
   facet_grid(~grad_year) +
   scale_fill_viridis_d() +
+  scale_x_discrete(breaks = c('first gen', 'not first gen'), labels = c('First Gen','Not First Gen')) +
   labs(title = 'First Gen Distribution by Sex from Fall 2015 to Spring 2018', x = 'Type of Student', y = 'Count', fill = 'Sex')
 
 ggplotly(p1)
@@ -89,6 +90,9 @@ If we limit the scope of the data to students who are confirmed first gen or not
 
 <center>
 ```{r, echo=FALSE, fig.align="center"}
+fgen$first_gen <- factor(fgen$first_gen, levels=c("first gen", "not first gen"),
+                         labels = c("First Gen", "Not First Gen"))
+
 p2 <- ggplot(fgen %>% filter(major_ct == 1), aes(x = major_ct, fill = major1_division)) +
   geom_bar(position = 'fill') +
   facet_grid(~first_gen)+
